@@ -19,6 +19,7 @@ mkdir -p  geneFinder/
 starfish annotate -T 2 -x macpha6_tyr -a ome2assembly.txt -g ome2gff.txt -p $STARFISH_PATH/db/YRsuperfams.p1-512.hmm -P $STARFISH_PATH/db/YRsuperfamRefs.faa -i tyr -o geneFinder/
 starfish consolidate -o ./ -g macpha6.gff3 -G geneFinder/macpha6_tyr.filt_intersect.gff
 
+realpath macpha6_tyr.filt_intersect.consolidated.gff | perl -pe 's/^/macpha6\t/' > ome2consolidatedGFF.txt
 starfish sketch -m 10000 -q geneFinder/macpha6_tyr.filt_intersect.ids -g ome2consolidatedGFF.txt -i s -x macpha6 -o geneFinder/
 grep -P '\ttyr\t' geneFinder/macpha6.bed > geneFinder/macpha6.tyr.bed
 
